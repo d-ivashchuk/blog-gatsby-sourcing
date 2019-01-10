@@ -15,7 +15,6 @@ class BlogIndex extends React.Component {
     const siteTitle = data.site.siteMetadata.title
     const posts = data.allMarkdownRemark.edges
     const author = data.site.siteMetadata.author
-    console.log(posts)
     const images = data.images.edges.map(image => (
       <Image
         fixed={image.node.childImageSharp.fixed}
@@ -34,6 +33,8 @@ class BlogIndex extends React.Component {
           title="All posts"
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
+        <Link to="/">Sourced from file system</Link>
+        <Link to="/contentful">Sourced from contentful</Link>
         <Images />
         <div
           style={{
@@ -47,6 +48,7 @@ class BlogIndex extends React.Component {
         <Avatar />
         {posts.map(({ node }) => {
           const title = node.frontmatter.title || node.fields.slug
+
           return (
             <div key={node.fields.slug}>
               <h3
@@ -89,7 +91,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      filter: { fileAbsolutePath: { regex: "/blog/" } }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
       edges {
         node {
           excerpt
