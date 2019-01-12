@@ -33,8 +33,14 @@ class BlogIndex extends React.Component {
           title="All posts"
           keywords={[`blog`, `gatsby`, `javascript`, `react`]}
         />
-        <Link to="/">Sourced from file system</Link>
-        <Link to="/contentful">Sourced from contentful</Link>
+        <div>
+          <p>
+            <Link to="/">Sourced from file system</Link>
+          </p>
+          <p>
+            <Link to="/contentful">Sourced from contentful</Link>
+          </p>
+        </div>
         <Images />
         <div
           style={{

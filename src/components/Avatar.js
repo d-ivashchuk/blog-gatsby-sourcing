@@ -10,7 +10,6 @@ function Avatar() {
       query={Query}
       render={data => {
         const { author, social } = data.site.siteMetadata
-        console.log(data)
         return (
           <div
             style={{
